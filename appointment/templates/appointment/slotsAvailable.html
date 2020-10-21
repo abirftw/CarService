@@ -1,7 +1,7 @@
 <form method="POST" action="{% url 'result' %}">
     {% csrf_token %}
     <input type="hidden" name="curdate" value="{{curDate.date}}">
-    <label>Slot</label>
+    <label>Available Slot</label>
     <br />
     {% for slot in available_slot %}
     <input type="radio" name="slot" value="{{slot.id}}"> {{slot.startTime}} - {{slot.endTime}}

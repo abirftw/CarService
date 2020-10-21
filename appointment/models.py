@@ -38,4 +38,4 @@ class AppointmentDetails(models.Model):
     phone = models.CharField(max_length=11)
 
     def __str__(self):
-        return self.app_date_text
+        return str(self.app_date)

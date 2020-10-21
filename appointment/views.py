@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import CLOSED_DAY, ALLDAY, DATE_FORMAT, Days, TimeSlots, Services
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from .models import CLOSED_DAY, ALLDAY, DATE_FORMAT, Days, TimeSlots, Services, AppointmentDetails
 import datetime
 # Create your views here.
 
@@ -29,5 +30,12 @@ def slotsOpen(request):
 
 
 def book(request):
-    print(request.POST.get('curdate', None))
-    return HttpResponse("Worked")
+    date = datetime.datetime.strptime(
+        request.POST['curdate'], DATE_FORMAT)
+    if AppointmentDetails.objects.filter(
+            app_date=date, app_slot_id=request.POST['slot']).exists():
+        return HttpResponseRedirect(reverse('slots'))
+    else:
+        AppointmentDetails.objects.create(
+            app_date=date, app_slot_id=request.POST['slot'], service_id=request.POST['service'], phone=request.POST['phone'])
+    return HttpResponseRedirect(reverse('home'))
