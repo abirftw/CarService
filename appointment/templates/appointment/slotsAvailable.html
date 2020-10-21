@@ -1,3 +1,19 @@
-{% for slot in available_slot %}
-{{slot.startTime}} - {{slot.endTime}}
-{% endfor %}
+<form method="POST" action="{% url 'result' %}">
+    {% csrf_token %}
+    <input type="hidden" name="curdate" value="{{curDate.date}}">
+    <label>Slot</label>
+    <br />
+    {% for slot in available_slot %}
+    <input type="radio" name="slot" value="{{slot.id}}"> {{slot.startTime}} - {{slot.endTime}}
+    <br />
+    {% endfor %}
+    <label>Service</label>
+    <br />
+    {%for service in service_list %}
+    <input type="radio" name="service" value="{{service.id}}"> {{service.name}}
+    <br />
+    {% endfor %}
+    <label>Phone Number:</label>
+    <input type="number" name="phone">
+    <input type="submit" value="submit">
+</form>

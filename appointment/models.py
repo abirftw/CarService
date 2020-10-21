@@ -1,5 +1,5 @@
 from django.db import models
-from enum import IntEnum, Enum
+from enum import IntEnum
 import datetime
 
 
@@ -27,9 +27,15 @@ class TimeSlots(models.Model):
     startTime = models.TimeField()
     endTime = models.TimeField()
 
+    def __str__(self):
+        return str(self.startTime) + "-" + str(self.endTime)
+
 
 class AppointmentDetails(models.Model):
     app_date = models.DateField('Appointment Date')
     app_slot = models.ForeignKey(TimeSlots, on_delete=models.CASCADE)
     service = models.ForeignKey(Services, on_delete=models.CASCADE)
     phone = models.CharField(max_length=11)
+
+    def __str__(self):
+        return self.app_date_text
