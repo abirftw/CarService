@@ -1,0 +1,9 @@
+<h2>Available dates for booking an appointment</h2>
+<h3>{{closed_day}} is off day</h3>
+<form action="{% url 'slots' %}" method="GET">
+    {% for x in ap_dates %}
+    <input type="radio" name="date" value="{{x.date}}"> {{x.date}}
+    <br>
+    {% endfor %}
+    <input type="submit" value="submit">
+</form>
