@@ -1,5 +1,5 @@
 from django.db import models
-from enum import IntEnum
+from enum import IntEnum, Enum
 import datetime
 
 
@@ -20,11 +20,16 @@ CLOSED_DAY = Days.SUNDAY
 
 class Services(models.Model):
     name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=3, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+class TimeSlots(models.Model):
+    startTime = models.TimeField()
+    endTime = models.TimeField()
 
 
 class AppointmentDetails(models.Model):
     app_date = models.DateField('Appointment Date')
-    app_slot = models.PositiveIntegerField()
+    app_slot = models.ForeignKey(TimeSlots, on_delete=models.CASCADE)
     service = models.ForeignKey(Services, on_delete=models.CASCADE)
     phone = models.CharField(max_length=11)
