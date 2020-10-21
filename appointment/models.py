@@ -38,4 +38,13 @@ class AppointmentDetails(models.Model):
     phone = models.CharField(max_length=11)
 
     def __str__(self):
-        return str(self.app_date)
+        return str(self.app_date) + " " + str(self.app_slot.id)
+
+    @classmethod
+    def createAppointment(cls, date, slot, service, number):
+        if date and slot and service and number:
+            if date >= datetime.datetime.today() and date.weekday() != CLOSED_DAY:
+                return cls.objects.create(app_date=date, app_slot_id=slot, service_id=service, phone=number)
+            else:
+                return None
+        return None
