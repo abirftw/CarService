@@ -3,6 +3,7 @@
 
 ### Django ###
 *.log
+*.pem
 *.pot
 *.pyc
 __pycache__/
