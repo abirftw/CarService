@@ -1,6 +1,4 @@
-{% if message %}
 {{message}}
-{% endif %}
 <h2>Available dates for booking an appointment</h2>
 <h3>{{closed_day}} is off day</h3>
 <form action="{% url 'slots' %}" method="GET">

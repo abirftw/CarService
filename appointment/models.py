@@ -42,6 +42,6 @@ class AppointmentDetails(models.Model):
 
     @classmethod
     def createAppointment(cls, date, slot, service, number):
-        if date.date < datetime.date.today() or date.weekday() == CLOSED_DAY:
+        if date < datetime.datetime.today() or date.weekday() == CLOSED_DAY:
             return None
         return cls.objects.create(app_date=date, app_slot_id=slot, service_id=service, phone=number)
