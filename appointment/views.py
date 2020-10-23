@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from enum import IntEnum
+from enum import IntEnum, auto
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import CLOSED_DAY, ALLDAY, DATE_FORMAT, Days, TimeSlots, Services, AppointmentDetails
@@ -8,11 +8,11 @@ import datetime
 
 
 class Status(IntEnum):
-    BAD_ATTEMPT = 0
-    SUCCESS = 1
-    DEFAULT = 2
-    OUT_OF_SLOT = 3
-    NO_SERVICE = 4
+    BAD_ATTEMPT = auto()
+    SUCCESS = auto()
+    DEFAULT = auto()
+    OUT_OF_SLOT = auto()
+    NO_SERVICE = auto()
 
 
 messages = {
